@@ -1,0 +1,87 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    background-color: peachpuff;
+}
+
+.dialogsItems {
+    border-right: 2px solid gray;
+}
+
+.dialog a {
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    color: black;
+}
+
+.dialog.active{
+    border-left: 5px solid gray;
+    background-color: lightgoldenrodyellow;
+}
+
+.dialog img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.messages {
+    width: inherit;
+    display: grid;
+    background-color: lightgoldenrodyellow;
+}
+
+.message:nth-child(odd) {
+    width: max-content;
+    margin: 10px 20px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    background-color: lightgrey;
+    border-radius: 5px 5px 5px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.message:nth-child(even) {
+    width: max-content;
+    margin: 10px 20px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    background-color: lightgrey;
+    border-radius: 5px 5px 0 5px;
+    position: relative;
+    z-index: 10;
+}
+
+.message:nth-child(odd)::after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 15px solid transparent;
+    margin-top: -10px;
+    top: 90%;
+    border-right: 10px solid lightgrey;
+    left: -10px;
+}
+
+.message:nth-child(even)::after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 15px solid transparent;
+    margin-top: -10px;
+    top: 90%;
+    border-left: 10px solid lightgrey;
+    right: -10px;
+}

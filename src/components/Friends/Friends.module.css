@@ -1,0 +1,11 @@
+.wrapper div {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.wrapper h2 {
+    color: white;
+    font-size: 35px;
+    margin-bottom: 10px;
+}

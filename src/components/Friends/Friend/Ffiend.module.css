@@ -1,0 +1,18 @@
+.block {
+    margin: 5px;
+}
+
+.block a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: gold;
+}
+
+.block img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid lightslategrey;
+}
