@@ -7,17 +7,18 @@ import {FriendType} from "../Friends/Friend/Friend";
 type profilePageType = {
     posts: Array<PostsType>
     dialogsData: Array<DialogsItemProps>
-}
+    newPostText: string
+};
 
 type messagePageType = {
     messageData: Array<MessageProps>
-}
+};
 
 export type stateType = {
     profilePage: profilePageType
     messagesPage: messagePageType
     sidebar: Array<FriendType>
-}
+};
 
 let state: stateType = {
     profilePage: {
@@ -56,7 +57,8 @@ let state: stateType = {
                 name: "Veronika",
                 src: "https://i.pinimg.com/originals/6d/c8/7a/6dc87ad6f004abcdfee40c25299b9502.jpg"
             }
-        ]
+        ],
+        newPostText: "la-la-lend"
     },
     messagesPage: {
         messageData: [
@@ -94,18 +96,24 @@ let state: stateType = {
             src: "https://i2.wp.com/www.alphr.com/wp-content/uploads/2018/04/how_to_back_up_photos_on_google_photos.jpg?resize=563%2C563&ssl=1"
         }
     ]
-}
+};
 
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostsType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
-    }
+    };
 
-    state.profilePage.posts.push(newPost)
-    renderEntireTree(state)
-}
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    renderEntireTree(state);
+};
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
+};
 
 export default state;
