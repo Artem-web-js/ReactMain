@@ -1,4 +1,3 @@
-import {renderEntireTree} from "../../render";
 import {PostsType} from "../Profile/Profile";
 import {DialogsItemProps} from "../Dialogs/DialogItem/DialogItem";
 import {MessageProps} from "../Dialogs/Message/Message";
@@ -19,6 +18,10 @@ export type stateType = {
     messagesPage: messagePageType
     sidebar: Array<FriendType>
 };
+
+let renderEntireTree = (props: stateType) => {
+
+}
 
 let state: stateType = {
     profilePage: {
@@ -114,6 +117,10 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     renderEntireTree(state);
+};
+
+export const subscribe = (observer: (props: stateType) => void) => {
+    renderEntireTree = observer
 };
 
 export default state;
