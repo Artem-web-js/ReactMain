@@ -14,7 +14,7 @@ let rerenderEntireTree = (props: stateType) => {
     );
 }
 
-rerenderEntireTree(store._state);
+rerenderEntireTree(store.getState());
 
 store.subscribe(rerenderEntireTree);
 

@@ -12,9 +12,8 @@ export type PostsType = {
 
 export type MyPostsType = {
     posts: Array<PostsType>
-    addPostCallback: (message: string) => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: any
 }
 
 const Profile = (props: MyPostsType) => {
@@ -22,7 +21,7 @@ const Profile = (props: MyPostsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} newPostText={props.newPostText} updateNewPostText={props.updateNewPostText} addPostCallback={store.addPost}/>
+            <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
         </div>
     )
 }

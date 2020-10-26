@@ -5,9 +5,10 @@ import {FriendType} from "../Friends/Friend/Friend";
 
 export type StoreType = {
     _state: stateType
-    addPost: (message: string) => void
-    updateNewPostText: (newText: string) => void
-    renderEntireTree: (props: stateType) => void
+    _callSubscriber: (props: stateType) => void
+    // addPost: (message: string) => void
+    // updateNewPostText: (newText: string) => void
+    dispatch: any
     subscribe: (observer: (props: stateType) => void) => void
     getState: () => stateType
 }
@@ -27,9 +28,6 @@ type messagePageType = {
 };
 
 let store: StoreType = {
-    renderEntireTree() {
-
-    },
     _state: {
         profilePage: {
             posts: [
@@ -107,26 +105,31 @@ let store: StoreType = {
             }
         ]
     },
-    addPost() {
-        const newPost: PostsType = {
-            id: 5,
-            message: store._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        store._state.profilePage.posts.push(newPost);
-        store._state.profilePage.newPostText = '';
-        store.renderEntireTree(store._state);
-    },
-    updateNewPostText(newText: string) {
-        store._state.profilePage.newPostText = newText;
-        store.renderEntireTree(store._state);
+    _callSubscriber() {
+        console.log('State changed');
     },
 
     subscribe(observer) {
-        store.renderEntireTree = observer;
+        this._callSubscriber = observer;
     },
     getState() {
         return this._state;
+    },
+
+    dispatch(action: any) {
+        if(action.type === "ADD-POST") {
+            const newPost: PostsType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if(action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 };
 

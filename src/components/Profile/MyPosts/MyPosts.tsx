@@ -7,9 +7,9 @@ import {MessageProps} from "../../Dialogs/Message/Message";
 
 type MyPostsType = {
     posts: Array<PostsType>
-    addPostCallback: (message: string) => void
+    dispatch: any
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    // updateNewPostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -17,12 +17,14 @@ const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.likesCount}/>)
 
     let addPost = () => {
-        props.addPostCallback(props.newPostText)
-    }
+        props.dispatch({type: "ADD-POST"});
+    };
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
-    }
+        let text = e.currentTarget.value;
+        let action = {type: "UPDATE-NEW-POST-TEXT", newText: text};
+        props.dispatch(action);
+    };
 
     return (
         <div>
