@@ -2,7 +2,7 @@ import React from 'react';
 import c from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {addPost} from "../REDUX/state";
+import store from "../REDUX/state";
 
 export type PostsType = {
     id: number
@@ -22,7 +22,7 @@ const Profile = (props: MyPostsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} newPostText={props.newPostText} updateNewPostText={props.updateNewPostText} addPostCallback={addPost}/>
+            <MyPosts posts={props.posts} newPostText={props.newPostText} updateNewPostText={props.updateNewPostText} addPostCallback={store.addPost}/>
         </div>
     )
 }

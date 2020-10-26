@@ -3,6 +3,7 @@ import c from './Navigation.module.css';
 import { NavLink } from 'react-router-dom';
 import Friends from "../Friends/Friends";
 import state from "../REDUX/state";
+import store from "../REDUX/state";
 
 const Navigations = () => {
     return (
@@ -22,7 +23,7 @@ const Navigations = () => {
             <div className={c.item}>
                 <NavLink to={'/settings'} activeClassName={c.activeLink}>Settings</NavLink>
             </div>
-            <Friends sidebar={state.sidebar}/>
+            <Friends sidebar={store._state.sidebar}/>
         </nav>
     )
 }

@@ -7,14 +7,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {stateType} from "./components/REDUX/state";
-import {addPost} from "./components/REDUX/state"
+import store, {StoreType} from "./components/REDUX/state";
 import Profile from './components/Profile/Profile';
 
 type AppType = {
-    state: stateType
-    addPostCallback: (message: string) => void
-    updateNewPostText: (newText: string) => void
+    store: StoreType
 }
 
 function App(props: AppType) {
@@ -25,12 +22,12 @@ function App(props: AppType) {
                 <Header/>
                 <Navigations/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogsData={props.state.profilePage.dialogsData}
-                                                                    messageData={props.state.messagesPage.messageData}/>}/>
-                    <Route path={'/profile'} render={() => <Profile posts={props.state.profilePage.posts}
-                                                                    newPostText={props.state.profilePage.newPostText}
-                                                                    updateNewPostText={props.updateNewPostText}
-                                                                    addPostCallback={addPost} />}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs dialogsData={props.store._state.profilePage.dialogsData}
+                                                                    messageData={props.store._state.messagesPage.messageData}/>}/>
+                    <Route path={'/profile'} render={() => <Profile posts={props.store._state.profilePage.posts}
+                                                                    newPostText={props.store._state.profilePage.newPostText}
+                                                                    updateNewPostText={props.store.updateNewPostText}
+                                                                    addPostCallback={store.addPost} />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
