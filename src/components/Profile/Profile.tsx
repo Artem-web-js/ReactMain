@@ -2,7 +2,7 @@ import React from 'react';
 import c from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import store from "../REDUX/state";
+import {AddPostActionType, ChangeNewTextActionType} from "../REDUX/state";
 
 export type PostsType = {
     id: number
@@ -13,7 +13,7 @@ export type PostsType = {
 export type MyPostsType = {
     posts: Array<PostsType>
     newPostText: string
-    dispatch: any
+    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
 }
 
 const Profile = (props: MyPostsType) => {

@@ -85,3 +85,18 @@
     border-left: 10px solid lightgrey;
     right: -10px;
 }
+
+.addMessageContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea {
+    flex-grow: 1;
+    height: 50px;
+}
+
+.addMessage {
+    height: 30px;
+    align-self: flex-end;
+}

@@ -2,12 +2,16 @@ import React, {RefObject, ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from '../Profile';
-import {DialogsItemProps} from "../../Dialogs/DialogItem/DialogItem";
-import {MessageProps} from "../../Dialogs/Message/Message";
+import {
+    addPostActionCreator,
+    AddPostActionType,
+    ChangeNewTextActionType,
+    updateNewPostTextActionCreator
+} from '../../REDUX/state';
 
 type MyPostsType = {
     posts: Array<PostsType>
-    dispatch: any
+    dispatch: (action: ChangeNewTextActionType | AddPostActionType) => void
     newPostText: string
     // updateNewPostText: (newText: string) => void
 }
@@ -17,12 +21,12 @@ const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.likesCount}/>)
 
     let addPost = () => {
-        props.dispatch({type: "ADD-POST"});
+        props.dispatch(addPostActionCreator());
     };
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value;
-        let action = {type: "UPDATE-NEW-POST-TEXT", newText: text};
+        let action = updateNewPostTextActionCreator(text);
         props.dispatch(action);
     };
 
