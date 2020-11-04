@@ -26,7 +26,7 @@ const App: React.FC<AppType> = (props) => {
                     <Route path={'/dialogs'} render={() => <Dialogs dialogsData={store.profilePage.dialogsData}
                                                                     messageData={store.messagesPage.messageData}
                                                                     newMessageBody={store.messagesPage.newMessageBody}
-                                                                    messagePage={store.messagesPage}
+                                                                    dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
                     <Route path={'/profile'} render={() => <Profile posts={store.profilePage.posts}
                                                                     newPostText={store.profilePage.newPostText}

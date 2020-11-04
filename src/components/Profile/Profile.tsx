@@ -2,7 +2,7 @@ import React from 'react';
 import c from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {AddPostActionType, ChangeNewTextActionType} from "../REDUX/state";
+import {AddPostActionType, ChangeNewTextActionType} from "../REDUX/profile-reducer";
 
 export type PostsType = {
     id: number

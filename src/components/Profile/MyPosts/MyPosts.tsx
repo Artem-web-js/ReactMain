@@ -2,12 +2,7 @@ import React, {RefObject, ChangeEvent} from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from '../Profile';
-import {
-    addPostActionCreator,
-    AddPostActionType,
-    ChangeNewTextActionType,
-    updateNewPostTextActionCreator
-} from '../../REDUX/state';
+import {ChangeNewTextActionType, AddPostActionType, addPostActionCreator, updateNewPostTextActionCreator} from "../../REDUX/profile-reducer";
 
 type MyPostsType = {
     posts: Array<PostsType>
