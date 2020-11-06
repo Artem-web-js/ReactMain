@@ -7,8 +7,10 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import store, {StoreType} from "./components/REDUX/state";
+// import store, {StoreType} from "./components/REDUX/store";
 import Profile from './components/Profile/Profile';
+import store from './components/REDUX/redux-store';
+import { StoreType } from './components/REDUX/store';
 
 type AppType = {
     store: StoreType
