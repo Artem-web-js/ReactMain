@@ -7,10 +7,9 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-// import store, {StoreType} from "./components/REDUX/store";
 import Profile from './components/Profile/Profile';
-import store from './components/REDUX/redux-store';
-import { StoreType } from './components/REDUX/store';
+import {StoreType} from './components/REDUX/store';
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppType = {
     store: StoreType
@@ -25,14 +24,17 @@ const App: React.FC<AppType> = (props) => {
                 <Header/>
                 <Navigations/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogsData={store.profilePage.dialogsData}
-                                                                    messageData={store.messagesPage.messageData}
-                                                                    newMessageBody={store.messagesPage.newMessageBody}
-                                                                    dispatch={props.store.dispatch.bind(props.store)}
+                    <Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
+                        // dialogsData={store.profilePage.dialogsData}
+                        // messageData={store.messagesPage.messageData}
+                        // newMessageBody={store.messagesPage.newMessageBody}
+                        // dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
-                    <Route path={'/profile'} render={() => <Profile posts={store.profilePage.posts}
-                                                                    newPostText={store.profilePage.newPostText}
-                                                                    dispatch={props.store.dispatch.bind(props.store)} />}/>
+                    <Route path={'/profile'} render={() => <Profile store={props.store}
+                        // posts={store.profilePage.posts}
+                        // newPostText={store.profilePage.newPostText}
+                        // dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>

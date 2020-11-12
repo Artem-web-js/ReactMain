@@ -1,8 +1,7 @@
 import React from 'react';
-import c from './Profile.module.css';
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {AddPostActionType, ChangeNewTextActionType} from "../REDUX/profile-reducer";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {StoreType} from "../REDUX/store";
 
 export type PostsType = {
     id: number
@@ -10,18 +9,16 @@ export type PostsType = {
     likesCount: number
 }
 
-export type MyPostsType = {
-    posts: Array<PostsType>
-    newPostText: string
-    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+export type MyPostsContainerType = {
+    store: StoreType
 }
 
-const Profile = (props: MyPostsType) => {
+const Profile = (props: MyPostsContainerType) => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     )
 }
