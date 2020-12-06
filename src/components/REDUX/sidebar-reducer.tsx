@@ -1,6 +1,9 @@
 import {FriendType} from "../Friends/Friend/Friend";
+import {PostsType} from "../Profile/Profile";
 
-let initialState = [
+const MY_FRIENDS = 'MY_FRIENDS'
+
+let initialState: Array<FriendType> = [
     {
         id: 1,
         name: "Artem",
@@ -29,7 +32,6 @@ let initialState = [
 ]
 
 const sidebarReducer = (state: Array<FriendType> = initialState, action: any) => {
-
     return state;
 }
 

@@ -13,12 +13,12 @@ export type MyPostsContainerType = {
     store: StoreType
 }
 
-const Profile = (props: MyPostsContainerType) => {
+const Profile = () => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
         </div>
     )
 }

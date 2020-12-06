@@ -15,8 +15,8 @@ type AppType = {
     store: StoreType
 }
 
-const App: React.FC<AppType> = (props) => {
-    const store = props.store.getState();
+const App = () => {
+    //const store = props.store.getState();
 
     return (
         <BrowserRouter>
@@ -24,17 +24,8 @@ const App: React.FC<AppType> = (props) => {
                 <Header/>
                 <Navigations/>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
-                        // dialogsData={store.profilePage.dialogsData}
-                        // messageData={store.messagesPage.messageData}
-                        // newMessageBody={store.messagesPage.newMessageBody}
-                        // dispatch={props.store.dispatch.bind(props.store)}
-                    />}/>
-                    <Route path={'/profile'} render={() => <Profile store={props.store}
-                        // posts={store.profilePage.posts}
-                        // newPostText={store.profilePage.newPostText}
-                        // dispatch={props.store.dispatch.bind(props.store)}
-                    />}/>
+                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                    <Route path={'/profile'} render={() => <Profile/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>

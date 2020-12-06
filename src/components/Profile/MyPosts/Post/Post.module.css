@@ -6,6 +6,7 @@
 .item img {
     width: 40px;
     border-radius: 50%;
+    box-shadow: 0 0 4px 1px black;
 }
 
 .likesCount {
