@@ -1,25 +1,48 @@
 import React from "react";
-import * as axios from 'axios';
+import axios from 'axios';
+import s from './Users.module.css'
 
 class Users extends React.Component<any, any> {
-
-    constructor(props: any) {
-        super(props);
-        //@ts-ignore
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+    componentDidMount() {
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((response: any) => {
-                this.props.setUser(response.data.items)
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            });
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then((response: any) => {
+                this.props.setUsers(response.data.items)
             });
     }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pagesCount)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <div>
+            <div>
+                {pages.map(p => {
+                   // @ts-ignore
+                    return <span className={this.props.currentPage === p && s.selectedPage}
+                    onClick={(e) => {this.onPageChanged(p)}}>{p}</span>
+                })}
+            </div>
             {
                 this.props.users.map((u: any) => <div key={u.id}>
                 <span>
-                    <div>
+                    <div className={s.usersPhoto}>
                         <img
-                            src={u.photos.small != null ? u.photos.small : "https://www.netclipart.com/pp/m/283-2833820_user-icon-orange-png.png"}
+                            src={"https://www.netclipart.com/pp/m/283-2833820_user-icon-orange-png.png"}
                             alt="userPhoto"/>
                     </div>
                     <div>

@@ -1,8 +1,31 @@
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 
-type UsersType = {
+export type FollowActionType = {
+    type: typeof FOLLOW
+    userID: number
+}
+export type UnfollowActionType = {
+    type: typeof UNFOLLOW
+    userID: number
+}
+export type SetUsersActionType = {
+    type: typeof SET_USERS
+    users: Array<UsersType>
+}
+export type SetCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+export type SetTotalUsersCountActionType = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    count: number
+}
+export type UsersActionTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType
+export type UsersType = {
     id: number
     photoURL: string
     followed: boolean
@@ -10,41 +33,21 @@ type UsersType = {
     status: string
     location: {city: string, country: string}
 }
-
 export type UsersReducerState = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: UsersReducerState = {
-    users: [
-        {
-            id: 1,
-            photoURL: "https://imhung.com/wp-content/uploads/2019/11/users-vector-icon-png_260862.jpg",
-            followed: false,
-            fullName: "Artem",
-            status: "I'm a boss",
-            location: {city: "Kyiv", country: "Ukraine"}
-        },
-        {
-            id: 2,
-            photoURL: "https://png.pngtree.com/png-clipart/20190922/original/pngtree-business-male-user-avatar-vector-png-image_4774078.jpg",
-            followed: false,
-            fullName: "Maks",
-            status: "I'm a dumb",
-            location: {city: "Piter", country: "Russia"}
-        },
-        {
-            id: 3,
-            photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa0-4Ry22Bx8q_n4CXoXIUp2qmIsNoxMOc3w&usqp=CAU",
-            followed: false,
-            fullName: "Sabina",
-            status: "I'm a queen",
-            location: {city: "Tbilisi", country: "Georgia"}
-        }
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 };
 
-const usersReducer = (state = initialState, action: any) => {
+const usersReducer = (state = initialState, action: UsersActionTypes) => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -67,7 +70,13 @@ const usersReducer = (state = initialState, action: any) => {
                 })
             }
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.count}
         }
         default:
             return state;
@@ -77,5 +86,7 @@ const usersReducer = (state = initialState, action: any) => {
 export const followAC = (userID: number) => ({type: FOLLOW, userID});
 export const unfollowAC = (userID: number) => ({type: UNFOLLOW, userID});
 export const setUsersAC = (userID: number) => ({type: SET_USERS, userID});
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
+export const setUsersTotalCountAC = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 
 export default usersReducer;
