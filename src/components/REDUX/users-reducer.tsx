@@ -14,7 +14,7 @@ export type UnfollowActionType = {
 }
 export type SetUsersActionType = {
     type: typeof SET_USERS
-    users: Array<UsersType>
+    users: Array<UsersItemsType>
 }
 export type SetCurrentPageActionType = {
     type: typeof SET_CURRENT_PAGE
@@ -25,29 +25,33 @@ export type SetTotalUsersCountActionType = {
     count: number
 }
 export type UsersActionTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType
-export type UsersType = {
+
+export type UsersItemsType = {
+    name: string
     id: number
-    photoURL: string
-    followed: boolean
-    fullName: string
+    photos: {
+        small: string
+        large: string
+    }
     status: string
-    location: {city: string, country: string}
+    followed: boolean
 }
+
 export type UsersReducerState = {
-    users: Array<UsersType>
+    users: Array<UsersItemsType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
 }
 
 let initialState: UsersReducerState = {
-    users: [],
+    users: [] as Array<UsersItemsType>,
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1
 };
 
-const usersReducer = (state = initialState, action: UsersActionTypes) => {
+const usersReducer = (state = initialState, action: UsersActionTypes): UsersReducerState => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -85,7 +89,7 @@ const usersReducer = (state = initialState, action: UsersActionTypes) => {
 
 export const followAC = (userID: number) => ({type: FOLLOW, userID});
 export const unfollowAC = (userID: number) => ({type: UNFOLLOW, userID});
-export const setUsersAC = (userID: number) => ({type: SET_USERS, userID});
+export const setUsersAC = (users: Array<UsersItemsType>): SetUsersActionType => ({type: SET_USERS, users});
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setUsersTotalCountAC = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 
