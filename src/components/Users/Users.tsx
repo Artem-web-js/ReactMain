@@ -1,9 +1,10 @@
 import React from "react";
 import axios from 'axios';
 import s from './Users.module.css'
-import {UsersItemsType} from "../REDUX/users-reducer";
+import {UsersItemsType, UsersReducerState} from "../REDUX/users-reducer";
+import {MapDispatchType} from "./UsersContainer";
 
-class Users extends React.Component<any, any> {
+class Users extends React.Component<MapDispatchType & UsersReducerState> {
     componentDidMount() {
         axios
             .get<{items : Array<UsersItemsType>, totalCount: number}>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -24,7 +25,7 @@ class Users extends React.Component<any, any> {
 
     render() {
 
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pagesCount)
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
@@ -34,11 +35,11 @@ class Users extends React.Component<any, any> {
             <div>
                 {pages.map(p => {
                     return <span className={this.props.currentPage === p ? s.selectedPage : ''}
-                    onClick={(e) => {this.onPageChanged(p)}}>{p}</span>
+                    onClick={(e) => {this.onPageChanged(p)}}>{p} </span>
                 })}
             </div>
             {
-                this.props.users.map((u: any) => <div key={u.id}>
+                this.props.users.map((u: UsersItemsType) => <div key={u.id}>
                 <span>
                     <div className={s.usersPhoto}>
                         <img

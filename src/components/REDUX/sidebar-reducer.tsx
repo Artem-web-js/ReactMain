@@ -1,7 +1,4 @@
 import {FriendType} from "../Friends/Friend/Friend";
-import {PostsType} from "../Profile/Profile";
-
-const MY_FRIENDS = 'MY_FRIENDS'
 
 let initialState: Array<FriendType> = [
     {

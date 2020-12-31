@@ -52,7 +52,7 @@ let initialState = {
     newPostText: "la-la-lend"
 };
 
-const profileReducer = (state: profilePageType = initialState, action: ActionTypes) => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsType = {

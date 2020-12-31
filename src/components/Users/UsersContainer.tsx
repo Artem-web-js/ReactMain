@@ -33,7 +33,7 @@ let mapDispatchToProps = (dispatch: any): MapDispatchType => {
     }
 }
 
-type MapDispatchType = {
+export type MapDispatchType = {
     follow:  (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<UsersItemsType>) => void

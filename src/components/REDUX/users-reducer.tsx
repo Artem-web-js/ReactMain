@@ -46,7 +46,7 @@ export type UsersReducerState = {
 
 let initialState: UsersReducerState = {
     users: [] as Array<UsersItemsType>,
-    pageSize: 5,
+    pageSize: 7,
     totalUsersCount: 0,
     currentPage: 1
 };
