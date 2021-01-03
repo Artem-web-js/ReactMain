@@ -1,61 +1,58 @@
-import usersReducer, {followAC} from "../users-reducer";
+import usersReducer, {followAC, unfollowAC, UsersReducerState} from "../users-reducer";
 
-test("", () => {
-    let startState = {
+let startState: UsersReducerState
+
+beforeEach(() => {
+    startState = {
         users: [
             {
                 "name": "maximLomako",
                 "id": 13597,
-                "uniqueUrlName": null,
                 "photos": {
-                    "small": null,
-                    "large": null
+                    "small": "",
+                    "large": ""
                 },
-                "status": null,
+                "status": "",
                 "followed": false
             },
             {
                 "name": "AlexWind",
                 "id": 13596,
-                "uniqueUrlName": null,
                 "photos": {
-                    "small": null,
-                    "large": null
+                    "small": "",
+                    "large": ""
                 },
-                "status": null,
-                "followed": false
+                "status": "",
+                "followed": true
             },
             {
                 "name": "03301993Ss",
                 "id": 13595,
-                "uniqueUrlName": null,
                 "photos": {
-                    "small": null,
-                    "large": null
+                    "small": "",
+                    "large": ""
                 },
-                "status": null,
+                "status": "",
                 "followed": false
             },
             {
                 "name": "aleksmz12",
                 "id": 13594,
-                "uniqueUrlName": null,
                 "photos": {
-                    "small": null,
-                    "large": null
+                    "small": "",
+                    "large": ""
                 },
-                "status": null,
+                "status": "",
                 "followed": false
             },
             {
                 "name": "Rupert_XXX",
                 "id": 13593,
-                "uniqueUrlName": null,
                 "photos": {
-                    "small": null,
-                    "large": null
+                    "small": "",
+                    "large": ""
                 },
-                "status": null,
+                "status": "",
                 "followed": false
             }
         ],
@@ -63,6 +60,16 @@ test("", () => {
         totalUsersCount: 0,
         currentPage: 1
     }
+})
 
-    //let endState = usersReducer(startState, followAC(13597))
+test("should be followed", () => {
+    let endState = usersReducer(startState, followAC(13597))
+
+    expect(endState.users[0].followed).toBeTruthy()
+})
+
+test("should be unfollowed", () => {
+    let endState = usersReducer(startState, unfollowAC(13596))
+
+    expect(endState.users[1].followed).toBeFalsy()
 })
