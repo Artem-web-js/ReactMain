@@ -7,6 +7,7 @@ export type FriendType = {
     src: string
     name: string
 }
+
 export const Friend = (props: FriendType) => {
     return (
         <div className={c.block}>

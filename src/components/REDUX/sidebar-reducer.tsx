@@ -1,5 +1,6 @@
 import {FriendType} from "../Friends/Friend/Friend";
 
+
 let initialState: Array<FriendType> = [
     {
         id: 1,

@@ -1,4 +1,4 @@
-import usersReducer, {followAC, unfollowAC, UsersReducerState} from "../users-reducer";
+import usersReducer, {follow, unfollow, UsersReducerState} from "../users-reducer";
 
 let startState: UsersReducerState
 
@@ -63,13 +63,13 @@ beforeEach(() => {
 })
 
 test("should be followed", () => {
-    let endState = usersReducer(startState, followAC(13597))
+    let endState = usersReducer(startState, follow(13597))
 
     expect(endState.users[0].followed).toBeTruthy()
 })
 
 test("should be unfollowed", () => {
-    let endState = usersReducer(startState, unfollowAC(13596))
+    let endState = usersReducer(startState, unfollow(13596))
 
     expect(endState.users[1].followed).toBeFalsy()
 })
