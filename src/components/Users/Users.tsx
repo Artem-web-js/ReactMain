@@ -1,11 +1,13 @@
 import React from "react";
 import s from "./Users.module.css";
 import {UsersItemsType, UsersReducerState} from "../REDUX/users-reducer";
+import {NavLink} from "react-router-dom";
+import userPhoto from "../../assets/userPhoto.png"
 
 
 type UsersPresentationComponentType = {
     onPageChanged: (pageNumber: number) => void
-    follow:  (userID: number) => void
+    follow: (userID: number) => void
     unfollow: (userID: number) => void
 }
 
@@ -29,9 +31,11 @@ let Users = (props: UsersReducerState & UsersPresentationComponentType) => {
             props.users.map((u: UsersItemsType) => <div key={u.id}>
                 <span>
                     <div className={s.usersPhoto}>
+                        <NavLink to={"/profile/" + u.id}>
                         <img
-                            src={"https://www.netclipart.com/pp/m/283-2833820_user-icon-orange-png.png"}
+                            src={u.photos.small != null ? u.photos.small : userPhoto}
                             alt="userPhoto"/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed

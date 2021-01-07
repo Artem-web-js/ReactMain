@@ -1,4 +1,4 @@
-import {ActionTypes, messagePageType} from "./store";
+import {MessageProps} from "../Dialogs/Message/Message";
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
@@ -9,6 +9,13 @@ export type ChangeNewBodyActionType = {
 }
 export type SendMessageActionType = {
     type: typeof SEND_MESSAGE
+}
+
+type ActionTypes = ChangeNewBodyActionType | SendMessageActionType
+
+type MessagePageType = {
+    messageData: Array<MessageProps>
+    newMessageBody: string
 }
 
 let initialState = {
@@ -22,7 +29,7 @@ let initialState = {
     newMessageBody: ""
 };
 
-const dialogsReducer = (state: messagePageType = initialState, action: ActionTypes) => {
+const dialogsReducer = (state: MessagePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
             return {

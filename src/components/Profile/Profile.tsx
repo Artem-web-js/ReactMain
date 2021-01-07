@@ -1,7 +1,6 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {StoreType} from "../REDUX/store";
 
 export type PostsType = {
     id: number
@@ -9,15 +8,11 @@ export type PostsType = {
     likesCount: number
 }
 
-export type MyPostsContainerType = {
-    store: StoreType
-}
-
-const Profile = () => {
+const Profile = (props: any) => {
 
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
     )

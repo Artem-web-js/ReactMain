@@ -1,12 +1,7 @@
 import React from "react";
-import {StoreType} from "../REDUX/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../REDUX/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-
-type DialogsContainerType = {
-    store: StoreType
-}
 
 let mapStateToProps = (state: any) => {
     return {

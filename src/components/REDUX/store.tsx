@@ -32,6 +32,7 @@ export type messagePageType = {
 
 export type ActionTypes = ChangeNewTextActionType | AddPostActionType | ChangeNewBodyActionType | SendMessageActionType
 
+/*
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -127,6 +128,4 @@ let store: StoreType = {
 
         this._callSubscriber(this._state);
     }
-};
-
-export default store;
+};*/
