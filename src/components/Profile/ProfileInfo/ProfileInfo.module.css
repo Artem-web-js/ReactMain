@@ -4,6 +4,8 @@
 
 .profileDescriptionBlock {
     display: flex;
+    background-color: gold;
+    padding: 15px;
 }
 
 .profileImage {
@@ -14,7 +16,6 @@
 
 .profileDescription {
     margin-left: 20px;
-    background-color: gold;
-    border-radius: 15px;
     padding: 20px;
+    border-left: 4px solid grey;
 }
