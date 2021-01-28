@@ -1,8 +1,34 @@
 .header {
     grid-area: h;
     background-color: brown;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header img {
     width: 70px;
+}
+
+.loginBlock {
+    margin-right: 20px;
+    color: gold;
+    font-size: 20px;
+}
+
+.login {
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    padding: 3px;
+    border-radius: 7px;
+}
+
+.loginBlock:hover {
+    transform: scale(.9);
+}
+
+.login:hover {
+    color: gold;
+    border-color: gold;
 }
