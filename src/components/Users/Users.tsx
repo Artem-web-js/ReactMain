@@ -2,13 +2,14 @@ import React from "react";
 import s from "./Users.module.css";
 import {UsersItemsType, UsersReducerState} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import userPhoto from "../../assets/userPhotoANotFound.png"
+import userPhoto from "../../assets/userPhotoANotFound.png";
 
 
 type UsersPresentationComponentType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
+    isAuth: boolean
 }
 
 let Users = (props: UsersReducerState & UsersPresentationComponentType) => {

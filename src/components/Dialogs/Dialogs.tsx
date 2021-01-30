@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import c from './Dialogs.module.css'
 import {DialogItem, DialogsItemProps} from "./DialogItem/DialogItem";
 import {Message, MessageProps} from "./Message/Message";
+import {Redirect} from "react-router-dom";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
@@ -9,10 +10,10 @@ type DialogsType = {
     dialogsPage: Array<DialogsItemProps>
     messageData: Array<MessageProps>
     newMessageBody: string
+    isAuth: boolean
 }
 
 const Dialogs = (props: DialogsType) => {
-    debugger
     let dialogs = props.dialogsPage.map(d => <DialogItem id={d.id} name={d.name} src={d.src}/>)
     let messages = props.messageData.map(m => <Message id={m.id} message={m.message}/>)
     let newMessageBody = props.newMessageBody;
@@ -24,6 +25,8 @@ const Dialogs = (props: DialogsType) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
     }
+
+    if(!props.isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={c.dialogs}>

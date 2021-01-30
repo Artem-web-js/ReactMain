@@ -9,7 +9,6 @@ export type PostsType = {
 }
 
 const Profile = (props: any) => {
-
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
