@@ -1,5 +1,7 @@
 .usersPhoto img {
     width: 70px;
+    background-color: gold;
+    border-radius: 50%;
 }
 
 .selectedPage {
