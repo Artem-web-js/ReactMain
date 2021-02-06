@@ -9,7 +9,6 @@ type UsersPresentationComponentType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    isAuth: boolean
 }
 
 let Users = (props: UsersReducerState & UsersPresentationComponentType) => {

@@ -18,12 +18,12 @@ beforeEach(() => {
 
 
 test("message data should update", () => {
-    let body = 'Do you know Ract component?'
+    let body = 'Do you know React component?'
 
     let endState = dialogsReducer(startState, updateNewMessageBodyCreator(body))
 
     expect(startState.newMessageBody).toBe("")
-    expect(endState.newMessageBody).toBe('Do you know Ract component?')
+    expect(endState.newMessageBody).toBe('Do you know React component?')
 })
 
 test("message data should be sent", () => {

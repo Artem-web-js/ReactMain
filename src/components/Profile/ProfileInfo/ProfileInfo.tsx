@@ -13,10 +13,10 @@ const ProfileInfo = (props: any) => {
         <div>
             <div className={c.content}>
                 <img src="https://www.inpixio.com/wp-content/uploads/2019/11/Hero-inPixio-Photo-Editor.jpg"
-                     alt="background photo"/>
+                     alt="background"/>
             </div>
             <div className={c.profileDescriptionBlock}>
-                    <img className={c.profileImage} src={props.profile.photos.large ? props.profile.photos.large : userAvatar}/>
+                    <img className={c.profileImage} src={props.profile.photos.large ? props.profile.photos.large : userAvatar} alt="profile"/>
                 <div className={c.profileDescription}>
                     <p>Имя: {props.profile.fullName}</p>
                     <p>Обо мне: {props.profile.aboutMe}</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import c from './Navigation.module.css';
 import { NavLink } from 'react-router-dom';
-import Friends from "../Friends/Friends";
+// import Friends from "../Friends/Friends";
 
 const Navigations = () => {
     return (
