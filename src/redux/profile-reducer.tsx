@@ -1,7 +1,5 @@
 import {PostsType} from "../components/Profile/Profile";
 import {DialogsItemProps} from "../components/Dialogs/DialogItem/DialogItem";
-import axios from "axios";
-import {UsersItemsType} from "./users-reducer";
 import {userAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
@@ -78,7 +76,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
-            };
+            }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
@@ -107,10 +105,10 @@ export const updateNewPostTextActionCreator = (text: string): ChangeNewTextActio
         newText: text
     }
 };
-
 export const getUserProfile = (userId: string) => (dispatch: any) => {
     userAPI.getProfile(userId).then((response) => {
         dispatch(setUserProfile(response.data))
     });
-}
+};
+
 export default profileReducer;

@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 import c from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
-import userAvatar from "../../../assets/userPhotoANotFound.png"
+import ProfileStatus from "./ProfileStatus";
+import userAvatar from "../../../assets/userPhotoANotFound.png";
 
 const ProfileInfo = (props: any) => {
 
@@ -11,12 +12,10 @@ const ProfileInfo = (props: any) => {
 
     return (
         <div>
-            <div className={c.content}>
-                <img src="https://www.inpixio.com/wp-content/uploads/2019/11/Hero-inPixio-Photo-Editor.jpg"
-                     alt="background"/>
-            </div>
             <div className={c.profileDescriptionBlock}>
-                    <img className={c.profileImage} src={props.profile.photos.large ? props.profile.photos.large : userAvatar} alt="profile"/>
+                <img className={c.profileImage}
+                     src={props.profile.photos.large ? props.profile.photos.large : userAvatar} alt="profile"/>
+                     <ProfileStatus status={"props.status"}/>
                 <div className={c.profileDescription}>
                     <p>Имя: {props.profile.fullName}</p>
                     <p>Обо мне: {props.profile.aboutMe}</p>

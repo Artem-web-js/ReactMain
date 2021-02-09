@@ -1,18 +1,25 @@
-.header {
-    grid-area: h;
-    background-color: brown;
+.headerWrapper {
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header img {
-    width: 70px;
+.header {
+    grid-area: h;
+    background-color: rgb(74, 118, 167);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 60px;
 }
 
 .loginBlock {
     margin-right: 20px;
-    color: gold;
+    color: white;
     font-size: 20px;
 }
 
