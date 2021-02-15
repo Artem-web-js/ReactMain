@@ -1,10 +1,11 @@
 import {PostsType} from "../components/Profile/Profile";
 import {DialogsItemProps} from "../components/Dialogs/DialogItem/DialogItem";
-import {userAPI} from "../api/api";
+import {userAPI, profileAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE"
+const SET_STATUS = "SET-STATUS"
 
 export type AddPostActionType = {
     type: typeof ADD_POST
@@ -13,10 +14,13 @@ export type ChangeNewTextActionType = {
     type: typeof UPDATE_NEW_POST_TEXT
     newText: string
 }
-
 export type SetUserProfileActionType = {
     type: typeof SET_USER_PROFILE
     profile: any
+}
+export type SetUserStatusActionType = {
+    type: typeof SET_STATUS
+    status: string
 }
 
 type ProfilePageType = {
@@ -24,9 +28,13 @@ type ProfilePageType = {
     dialogsData: Array<DialogsItemProps>
     newPostText: string
     profile: null
+    status: string
 }
 
-type ActionsType = AddPostActionType | ChangeNewTextActionType | SetUserProfileActionType
+type ActionsType = AddPostActionType
+    | ChangeNewTextActionType
+    | SetUserProfileActionType
+    | SetUserStatusActionType
 
 let initialState: ProfilePageType = {
     posts: [
@@ -66,7 +74,8 @@ let initialState: ProfilePageType = {
         }
     ],
     newPostText: "la-la-lend",
-    profile: null
+    profile: null,
+    status: ''
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
@@ -92,6 +101,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 profile: action.profile
             }
+            case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state;
     }
@@ -100,14 +114,30 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST});
 export const setUserProfile = (profile: any): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile});
 export const updateNewPostTextActionCreator = (text: string): ChangeNewTextActionType => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
+    return { type: UPDATE_NEW_POST_TEXT, newText: text }
 };
+export const setStatus = (status: string): SetUserStatusActionType => {
+    return { type: SET_STATUS, status }
+};
+
 export const getUserProfile = (userId: string) => (dispatch: any) => {
     userAPI.getProfile(userId).then((response) => {
         dispatch(setUserProfile(response.data))
+    });
+};
+
+export const getStatus = (userId: string) => (dispatch: any) => {
+    profileAPI.getStatus(userId).then((response) => {
+        //@ts-ignore
+        dispatch(setStatus(response.data))
+    });
+};
+
+export const updateStatus = (status: string) => (dispatch: any) => {
+    profileAPI.updateStatus(status).then((response) => {
+        if(response.data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     });
 };
 
