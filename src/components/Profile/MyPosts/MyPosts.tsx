@@ -1,42 +1,48 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from '../Profile';
+import {reduxForm, Field} from "redux-form";
 
 type MyPostsType = {
     posts: Array<PostsType>
     newPostText: string
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
+    addPost: (newPost: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
 
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.likesCount}/>)
 
-    let onAddPost = () => {
-        props.addPost();
-    };
-
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value;
-        props.updateNewPostText(text);
-    };
+    const addNewPost = (value: any) => {
+        debugger
+        props.addPost(value.newPost)
+    }
 
     return (
         <div>
             <h3>My posts</h3>
-            <div>
-                <textarea cols={40} rows={5} onChange={onPostChange} value={props.newPostText}/>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
+            <AddPostFormRedux onSubmit={addNewPost}/>
             <div className={c.posts}>
                 {postsElements}
             </div>
         </div>
     )
 }
+
+const AddPostForm = (props: any) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component={'textarea'}
+                   name={'newPost'}
+                   placeholder={'Enter your message...'}/>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+}
+
+const AddPostFormRedux = reduxForm({form: 'ProfileAddNewPostForm'})(AddPostForm)
 
 export default MyPosts;
