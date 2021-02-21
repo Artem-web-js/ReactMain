@@ -3,6 +3,8 @@ import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from '../Profile';
 import {reduxForm, Field} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import { Textarea } from '../../common/FormsControls/FormsControls';
 
 type MyPostsType = {
     posts: Array<PostsType>
@@ -15,7 +17,6 @@ const MyPosts = (props: MyPostsType) => {
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.likesCount}/>)
 
     const addNewPost = (value: any) => {
-        debugger
         props.addPost(value.newPost)
     }
 
@@ -30,12 +31,16 @@ const MyPosts = (props: MyPostsType) => {
     )
 }
 
+const maxLength10 = maxLengthCreator(10)
+
 const AddPostForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'}
+            <Field component={Textarea}
                    name={'newPost'}
-                   placeholder={'Enter your message...'}/>
+                   placeholder={'Enter your message...'}
+                   validate={[required, maxLength10]}
+            />
             <div>
                 <button>Add post</button>
             </div>
