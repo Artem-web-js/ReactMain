@@ -32,7 +32,7 @@
 }
 
 .loginBlock:hover {
-    transform: scale(.9);
+    color: gold
 }
 
 .login:hover {

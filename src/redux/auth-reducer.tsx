@@ -18,11 +18,7 @@ export type StateAuthType = {
 
 type AuthUserType = {
     type: typeof SET_USER_DATA
-    data: {
-        userId: number
-        email: string
-        login: string
-    }
+    payload: StateAuthType
 }
 
 const authReducer = (state: StateAuthType = initialState, action: AuthUserType): StateAuthType => {
@@ -30,8 +26,7 @@ const authReducer = (state: StateAuthType = initialState, action: AuthUserType):
         case SET_USER_DATA: {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         }
         default:
@@ -39,9 +34,9 @@ const authReducer = (state: StateAuthType = initialState, action: AuthUserType):
     }
 }
 
-export const setAuthUserData = (userId: number, email: string, login: string): AuthUserType => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): AuthUserType => ({
     type: SET_USER_DATA,
-    data: {userId, email, login}
+    payload: {userId, email, login, isAuth}
 });
 
 export const getAuthUserData = () => {
@@ -49,7 +44,27 @@ export const getAuthUserData = () => {
         authAPI.me().then((data: any) => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data
-                dispatch(setAuthUserData(id, email, login))
+                dispatch(setAuthUserData(id, email, login, true))
+            }
+        });
+    }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: any) => {
+        authAPI.login(email, password, rememberMe).then((data: any) => {
+            if (data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            }
+        });
+    }
+}
+
+export const logout = () => {
+    return (dispatch: any) => {
+        authAPI.logout().then((data: any) => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
             }
         });
     }

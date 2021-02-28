@@ -2,8 +2,8 @@ import axios from "axios";
 import {UsersItemsType} from "../redux/users-reducer";
 
 const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         "API-KEY": "9e4686de-4379-4e75-89bc-e99abdd3cdc3"
     }
@@ -50,5 +50,13 @@ export const authAPI = {
         return instance
             .get(`auth/me`)
             .then((response) => response.data);
+    },
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance
+            .post(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance
+            .delete(`auth/login`)
     }
 }
