@@ -53,8 +53,7 @@ export const getAuthUserData = () => {
 
 export const login = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: any) => {
-        debugger
-        authAPI.login(email, password, rememberMe).then((response: any) => {
+        return authAPI.login(email, password, rememberMe).then((response: any) => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
