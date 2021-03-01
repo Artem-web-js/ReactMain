@@ -2,10 +2,11 @@ import React from "react";
 import {reduxForm, Field} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {login, logout} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
+import style from "../common/FormsControls/FormsControls.module.css"
 
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
@@ -34,6 +35,11 @@ const LoginForm = (props: any) => {
                        name={'rememberMe'}
                        type={'checkbox'}/>remember me
             </div>
+            {
+                props.error && <div className={style.formSummaryError}>
+                    {props.error}
+                </div>
+            }
             <div>
                 <button>Login</button>
             </div>
@@ -51,7 +57,7 @@ const Login = (props: LoginPropsType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
 
