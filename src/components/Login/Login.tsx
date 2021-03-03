@@ -51,8 +51,13 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm)
 
+/*type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}*/
+
 const Login = (props: LoginPropsType) => {
-    // {email: string, password: string, rememberMe: boolean}
     const onSubmit = (formData: any) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }

@@ -132,11 +132,11 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     userId
 });
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
     return (dispatch: any) => {
-        dispatch(setCurrentPage(currentPage))
+        dispatch(setCurrentPage(page))
         dispatch(toggleIsFetching(true))
-        userAPI.getUsers(currentPage, pageSize).then((data) => {
+        userAPI.getUsers(page, pageSize).then((data) => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
@@ -147,7 +147,7 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
 export const follow = (userId: number) => {
     return (dispatch: any) => {
         dispatch(toggleFollowingProgress(true, userId))
-        userAPI.followUser(userId).then((data: any) => {
+        userAPI.followUser(userId).then((data) => {
             if (data.resultCode === 0) {
                 dispatch(followSuccess(userId))
             }
@@ -159,7 +159,7 @@ export const follow = (userId: number) => {
 export const unfollow = (userId: number) => {
     return (dispatch: any) => {
         dispatch(toggleFollowingProgress(true, userId))
-        userAPI.unfollowUser(userId).then((data: any) => {
+        userAPI.unfollowUser(userId).then((data) => {
             if (data.resultCode === 0) {
                 dispatch(unfollowSuccess(userId))
             }
