@@ -3,7 +3,7 @@ import c from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import chat from '../../assets/chat.svg'
 
-const Header = (props: any) => {
+const Header = React.memo((props: any) => {
     return (
         <header className={c.header}>
             <div className={c.headerWrapper}>
@@ -16,6 +16,6 @@ const Header = (props: any) => {
             </div>
         </header>
     )
-}
+})
 
 export default Header;

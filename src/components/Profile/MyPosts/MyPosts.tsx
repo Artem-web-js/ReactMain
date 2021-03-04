@@ -12,7 +12,7 @@ type MyPostsType = {
     addPost: (newPost: string) => void
 }
 
-const MyPosts = (props: MyPostsType) => {
+const MyPosts = React.memo((props: MyPostsType) => {
 
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.likesCount}/>)
 
@@ -29,7 +29,7 @@ const MyPosts = (props: MyPostsType) => {
             </div>
         </div>
     )
-}
+})
 
 const maxLength10 = maxLengthCreator(10)
 

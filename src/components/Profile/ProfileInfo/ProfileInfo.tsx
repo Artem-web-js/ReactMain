@@ -5,7 +5,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import userAvatar from "../../../assets/userPhotoANotFound.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props: any) => {
+const ProfileInfo = React.memo((props: any) => {
 
     if (!props.profile) {
         return <Preloader/>
@@ -26,6 +26,6 @@ const ProfileInfo = (props: any) => {
             </div>
         </div>
     )
-}
+})
 
 export default ProfileInfo;

@@ -11,7 +11,7 @@ type UsersPresentationComponentType = {
     unfollow: (userID: number) => void
 }
 
-let Users = (props: UsersReducerState & UsersPresentationComponentType) => {
+let Users = React.memo((props: UsersReducerState & UsersPresentationComponentType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -61,6 +61,6 @@ let Users = (props: UsersReducerState & UsersPresentationComponentType) => {
             </div>)
         }
     </div>
-}
+})
 
 export default Users;
