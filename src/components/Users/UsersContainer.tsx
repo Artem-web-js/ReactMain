@@ -53,7 +53,7 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export type MapDispatchType = {
+type MapDispatchType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setCurrentPage: (pageNumber: number) => void

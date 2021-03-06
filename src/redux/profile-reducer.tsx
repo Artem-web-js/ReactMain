@@ -1,6 +1,8 @@
 import {PostsType} from "../components/Profile/Profile";
 import {DialogsItemProps} from "../components/Dialogs/DialogItem/DialogItem";
 import {userAPI, profileAPI} from "../api/api";
+import {AppStateType} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE"
@@ -24,6 +26,7 @@ type ProfilePageType = {
     dialogsData: Array<DialogsItemProps>
     profile: null
     status: string
+    newPost: string
 }
 
 type ActionsType = AddPostActionType
@@ -68,7 +71,8 @@ let initialState: ProfilePageType = {
         }
     ],
     profile: null,
-    status: ''
+    status: '',
+    newPost: ''
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
@@ -104,20 +108,21 @@ export const setStatus = (status: string): SetUserStatusActionType => {
     return { type: SET_STATUS, status }
 };
 
-export const getUserProfile = (userId: string) => (dispatch: any) => {
+type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
+
+export const getUserProfile = (userId: string): ThunkType => (dispatch) => {
     userAPI.getProfile(userId).then((response) => {
         dispatch(setUserProfile(response.data))
     });
 };
 
-export const getStatus = (userId: string) => (dispatch: any) => {
+export const getStatus = (userId: string): ThunkType => (dispatch) => {
     profileAPI.getStatus(userId).then((response) => {
-        //@ts-ignore
         dispatch(setStatus(response.data))
     });
 };
 
-export const updateStatus = (status: string) => (dispatch: any) => {
+export const updateStatus = (status: string): ThunkType => (dispatch) => {
     profileAPI.updateStatus(status).then((response) => {
         if(response.data.resultCode === 0) {
             dispatch(setStatus(status))
