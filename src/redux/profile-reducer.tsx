@@ -108,7 +108,10 @@ export const setStatus = (status: string): SetUserStatusActionType => {
     return { type: SET_STATUS, status }
 };
 
+//thunks Type
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
+
+//thunks
 
 export const getUserProfile = (userId: string): ThunkType => (dispatch) => {
     userAPI.getProfile(userId).then((response) => {
