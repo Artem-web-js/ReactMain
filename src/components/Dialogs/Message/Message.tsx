@@ -6,10 +6,10 @@ export type MessageProps = {
     message: string
 }
 
-export const Message = (props: MessageProps) => {
+export const Message = ({message}: MessageProps) => {
     return (
         <div className={c.message}>
-            {props.message}
+            {message}
         </div>
     )
 }

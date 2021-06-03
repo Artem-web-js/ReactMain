@@ -11,7 +11,7 @@ const ProfileStatusWithHooks = (props: ProfileStatusType) => {
     let [status, setStatus] = useState(props.status)
 
     useEffect(() => {
-        setStatus((props.status))
+        setStatus(props.status)
     }, [props.status])
 
     let onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {

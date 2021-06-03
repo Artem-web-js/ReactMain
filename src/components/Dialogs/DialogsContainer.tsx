@@ -5,11 +5,11 @@ import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import React from "react";
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = ({profilePage, messagesPage}: any) => {
     return {
-        dialogsPage: state.profilePage.dialogsData,
-        messageData: state.messagesPage.messageData,
-        newMessageBody: state.messagesPage.newMessageBody,
+        dialogsPage: profilePage.dialogsData,
+        messageData: messagesPage.messageData,
+        newMessageBody: messagesPage.newMessageBody,
     }
 }
 

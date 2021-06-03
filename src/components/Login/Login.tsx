@@ -1,5 +1,5 @@
 import React from "react";
-import {reduxForm, Field} from "redux-form";
+import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
@@ -8,13 +8,15 @@ import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 import style from "../common/FormsControls/FormsControls.module.css"
 
-type LoginPropsType = {
+export type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
     logout: () => void
     isAuth: boolean
 }
 
-const LoginForm = (props: any) => {
+type OwnProps = {}
+type PropsType  = InjectedFormProps<FormDataType, OwnProps>
+const LoginForm = (props: PropsType) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -47,18 +49,18 @@ const LoginForm = (props: any) => {
     )
 }
 
-const LoginReduxForm = reduxForm({
+const LoginReduxForm = reduxForm<FormDataType>({
     form: 'login'
 })(LoginForm)
 
-/*type FormDataType = {
+type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-}*/
+}
 
 const Login = (props: LoginPropsType) => {
-    const onSubmit = (formData: any) => {
+    const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 

@@ -5,9 +5,9 @@ import Preloader from "../../common/Preloader/Preloader";
 import userAvatar from "../../../assets/userPhotoANotFound.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = React.memo((props: any) => {
+const ProfileInfo = React.memo(({profile, updateStatus, status}: any) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
 
@@ -15,13 +15,13 @@ const ProfileInfo = React.memo((props: any) => {
         <div>
             <div className={c.profileDescriptionBlock}>
                 <img className={c.profileImage}
-                     src={props.profile.photos.large ? props.profile.photos.large : userAvatar} alt="profile"/>
-                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                     src={profile.photos.large ? profile.photos.large : userAvatar} alt="profile"/>
+                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 <div className={c.profileDescription}>
-                    <p>Имя: {props.profile.fullName}</p>
-                    <p>Обо мне: {props.profile.aboutMe}</p>
-                    <p>Поиск работы: {props.profile.lookingForAJob ? "open to work" : "I have job"}</p>
-                    <p>Работа: {props.profile.lookingForAJobDescription}</p>
+                    <p>Имя: {profile.fullName}</p>
+                    <p>Обо мне: {profile.aboutMe}</p>
+                    <p>Поиск работы: {profile.lookingForAJob ? "open to work" : "I have job"}</p>
+                    <p>Работа: {profile.lookingForAJobDescription}</p>
                 </div>
             </div>
         </div>

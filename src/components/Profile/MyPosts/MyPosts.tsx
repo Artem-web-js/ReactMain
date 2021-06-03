@@ -33,9 +33,9 @@ const MyPosts = React.memo((props: MyPostsType) => {
 
 const maxLength10 = maxLengthCreator(10)
 
-const AddPostForm = (props: any) => {
+const AddPostForm = ({handleSubmit}: any) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Field component={Textarea}
                    name={'newPost'}
                    placeholder={'Enter your message...'}

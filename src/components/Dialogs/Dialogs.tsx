@@ -14,12 +14,12 @@ export type DialogsType = {
     newMessageBody: string
 }
 
-const Dialogs = (props: DialogsType) => {
-    let dialogs = props.dialogsPage.map(d => <DialogItem id={d.id} name={d.name} src={d.src}/>)
-    let messages = props.messageData.map(m => <Message id={m.id} message={m.message}/>)
+const Dialogs = ({dialogsPage, messageData, sendMessage}: DialogsType) => {
+    let dialogs = dialogsPage.map(d => <DialogItem id={d.id} name={d.name} src={d.src}/>)
+    let messages = messageData.map(m => <Message id={m.id} message={m.message}/>)
 
     let addNewMessage = (value: any) => {
-        props.sendMessage(value.newMessageBody)
+        sendMessage(value.newMessageBody)
     }
 
     return (
@@ -39,9 +39,9 @@ const Dialogs = (props: DialogsType) => {
 
 const maxLength50 = maxLengthCreator(50)
 
-const AddMessageForm = (props: any) => {
+const AddMessageForm = ({handleSubmit}: any) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Field className={c.textarea}
                    component={Textarea}
                    name={'newMessageBody'}

@@ -8,10 +8,10 @@ export type PostsType = {
     likesCount: number
 }
 
-const Profile = (props: any) => {
+const Profile = ({profile, status, updateStatus}: any) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     )

@@ -8,14 +8,14 @@ export type FriendType = {
     name: string
 }
 
-export const Friend = (props: FriendType) => {
+export const Friend = ({id, name, src}: FriendType) => {
     return (
         <div className={c.block}>
-            <NavLink to={'/dialogs/' + props.id}>
+            <NavLink to={'/dialogs/' + id}>
                 <img
-                    src={props.src}
+                    src={src}
                     alt="avatar"/>
-                {props.name}
+                {name}
             </NavLink>
         </div>
     )
