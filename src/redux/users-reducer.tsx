@@ -62,6 +62,7 @@ export type UsersItemsType = {
 export type UsersReducerState = {
     users: Array<UsersItemsType>
     pageSize: number
+    portionSize: number
     totalUsersCount: number
     currentPage: number
     isFetching?: boolean
@@ -70,6 +71,7 @@ export type UsersReducerState = {
 const initialState: UsersReducerState = {
     users: [] as Array<UsersItemsType>,
     pageSize: 7,
+    portionSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,

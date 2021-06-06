@@ -13,7 +13,10 @@ type UsersPresentationComponentType = {
 let Users = React.memo((props: UsersReducerState & UsersPresentationComponentType) => {
 
     return <div>
-        <Paginator onPageChanged={props.onPageChanged} totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+        <Paginator onPageChanged={props.onPageChanged}
+                   totalUsersCount={props.totalUsersCount}
+                   pageSize={props.pageSize}
+                   portionSize={props.portionSize}
                    currentPage={props.currentPage}/>
         {props.users.map((u: UsersItemsType) => {
             return <User
