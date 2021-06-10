@@ -4,40 +4,20 @@ import {userAPI, profileAPI} from "../api/api";
 import {AppStateType} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
 
-const ADD_POST = "ADD-POST";
-const SET_USER_PROFILE = "SET-USER-PROFILE"
-const SET_STATUS = "SET-STATUS"
-const DELETE_USER_POST = "DELETE_USER_POST"
-
-export type AddPostActionType = {
-    type: typeof ADD_POST
-    newPost: string
-}
-export type SetUserProfileActionType = {
-    type: typeof SET_USER_PROFILE
-    profile: any
-}
-export type SetUserStatusActionType = {
-    type: typeof SET_STATUS
-    status: string
-}
-export type DeletePostActionType = {
-    type: typeof DELETE_USER_POST
-    id: number
-}
-
 export type ProfilePageType = {
     posts: Array<PostsType>
     dialogsData: Array<DialogsItemProps>
     profile: null
     status: string
     newPost: string
+    photos: any
 }
 
-type ActionsType = AddPostActionType
-    | SetUserProfileActionType
-    | SetUserStatusActionType
-    | DeletePostActionType
+type ActionsType = ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
+    | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 let initialState: ProfilePageType = {
     posts: [
@@ -78,12 +58,13 @@ let initialState: ProfilePageType = {
     ],
     profile: null,
     status: '',
-    newPost: ''
+    newPost: '',
+    photos: null
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
-        case ADD_POST:
+        case "ADD_POST":
             const newPost: PostsType = {
                 id: 5,
                 message: action.newPost,
@@ -93,32 +74,35 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 posts: [...state.posts, newPost]
             }
-        case SET_USER_PROFILE:
+        case "SET_USER_PROFILE":
             return {
                 ...state,
                 profile: action.profile
             }
-        case SET_STATUS:
+        case "SET_STATUS":
             return {
                 ...state,
                 status: action.status
             }
-        case DELETE_USER_POST:
+        case "DELETE_USER_POST":
             return {
                 ...state,
                 posts: state.posts.filter(post => post.id !== action.id)
             }
+        case "SAVE_PHOTO_SUCCESS": {
+            // @ts-ignore
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = (newPost: string): AddPostActionType => ({type: ADD_POST, newPost});
-export const setUserProfile = (profile: any): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile});
-export const setStatus = (status: string): SetUserStatusActionType => {
-    return {type: SET_STATUS, status}
-};
-export const deletePost = (id: any): DeletePostActionType => ({type: DELETE_USER_POST, id});
+export const addPostActionCreator = (newPost: string) => ({type: "ADD_POST", newPost} as const);
+export const setUserProfile = (profile: any) => ({type: "SET_USER_PROFILE", profile} as const);
+export const setStatus = (status: string) => ({type: "SET_STATUS", status} as const);
+export const deletePost = (id: any) => ({type: "DELETE_USER_POST", id} as const);
+export const savePhotoSuccess = (photos: any) => ({type: "SAVE_PHOTO_SUCCESS", photos} as const);
 
 //thunks Type
 type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -139,6 +123,13 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+};
+
+export const savePhoto = (file: any): ThunkType => async (dispatch) => {
+    const response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 };
 

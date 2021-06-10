@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, savePhoto, updateStatus} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {withRouter, RouteComponentProps} from "react-router-dom";
 import {compose} from "redux";
@@ -23,15 +23,16 @@ type MapStatePropsType = {
     status: string
     authorizedUserId: string
     updateStatus: () => void
+    savePhoto: () => void
 }
 
 class ProfileContainer extends React.Component<PropsType> {
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
 
-        if(!userId) {
+        if (!userId) {
             userId = this.props.authorizedUserId
-            if(!userId) {
+            if (!userId) {
                 this.props.history.push('/login')
             }
         }
@@ -40,10 +41,22 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getStatus(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId)
+            this.refreshProfile();
+    }
+
     render() {
         return (
             <div>
                 <Profile {...this.props}
+                         isOwner={!this.props.match.params.userId}
+                         savePhoto={this.props.savePhoto}
                          pfofile={this.props.profile}
                          status={this.props.status}
                          updateStatus={this.props.updateStatus}/>
@@ -57,11 +70,11 @@ let mapStateToProps = (state: AppStateType) => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         authorizedUserId: state.auth.userId,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
     }
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto}),
     withRouter
 )(ProfileContainer);

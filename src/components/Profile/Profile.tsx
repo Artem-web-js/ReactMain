@@ -8,10 +8,10 @@ export type PostsType = {
     likesCount: number
 }
 
-const Profile = ({profile, status, updateStatus}: any) => {
+const Profile = ({profile, status, updateStatus, isOwner, savePhoto}: any) => {
     return (
         <div>
-            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
+            <ProfileInfo savePhoto={savePhoto} isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     )
