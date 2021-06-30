@@ -3,6 +3,7 @@ import {DialogsItemProps} from "../components/Dialogs/DialogItem/DialogItem";
 import {userAPI, profileAPI} from "../api/api";
 import {AppStateType} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
+import {Dispatch} from "redux";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -109,24 +110,24 @@ type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 //thunks
 
-export const getUserProfile = (userId: string): ThunkType => async (dispatch) => {
+export const getUserProfile = (userId: string): ThunkType => async (dispatch: Dispatch) => {
     const response = await userAPI.getProfile(userId)
     dispatch(setUserProfile(response.data))
 };
 
-export const getStatus = (userId: string): ThunkType => async (dispatch) => {
+export const getStatus = (userId: string): ThunkType => async (dispatch: Dispatch) => {
     const response = await profileAPI.getStatus(userId)
     dispatch(setStatus(response.data))
 };
 
-export const updateStatus = (status: string): ThunkType => async (dispatch) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch: Dispatch) => {
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
 };
 
-export const savePhoto = (file: any): ThunkType => async (dispatch) => {
+export const savePhoto = (file: any): ThunkType => async (dispatch: Dispatch) => {
     const response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
